@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   printuint.c                                        :+:    :+:            */
+/*   printint.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rkieboom <rkieboom@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/01/24 19:20:36 by rkieboom       #+#    #+#                */
-/*   Updated: 2020/01/31 18:06:35 by rkieboom      ########   odam.nl         */
+/*   Created: 2020/01/02 13:13:11 by rkieboom       #+#    #+#                */
+/*   Updated: 2020/01/31 18:06:42 by rkieboom      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "ft_printf.h"
 
-int		printuint(t_flags *list, char *result)
+int		printint(t_flags *list, char *result)
 {
 	list->chramount += (int)ft_strlen(result);
 	if (ft_putstr(result) == -1)
@@ -20,7 +20,7 @@ int		printuint(t_flags *list, char *result)
 	return (0);
 }
 
-int		uint_printwidth(t_flags *list, char *result)
+int		int_printwidth(t_flags *list, char *result)
 {
 	int		length;
 
@@ -42,7 +42,7 @@ int		uint_printwidth(t_flags *list, char *result)
 	return (0);
 }
 
-int		uint_printprec(t_flags *list, char *result)
+int		int_printprec(t_flags *list, char *result)
 {
 	int		length;
 	int		i;
@@ -67,7 +67,7 @@ int		uint_printprec(t_flags *list, char *result)
 	return (0);
 }
 
-int		uint_printprec2(t_flags *list, char *result, int length, int i)
+int		int_printprec2(t_flags *list, char *result, int length, int i)
 {
 	while ((list->flags_precval - length) > 0)
 	{
@@ -76,33 +76,7 @@ int		uint_printprec2(t_flags *list, char *result, int length, int i)
 		list->chramount++;
 		list->flags_precval--;
 	}
-	if (list->flags_minus == 0)
-		if (ft_putstr(result + i) == -1)
-			return (-1);
-	return (0);
-}
-
-int		uint_printnull(t_flags *list, char *result)
-{
-	int		length;
-	int		i;
-
-	i = 0;
-	length = ft_strlen(result);
-	list->chramount += ft_strlen(result);
-	if (list->flags_minus == 1)
-	{
-		if (ft_putstr(result) == -1)
-			return (-1);
-	}
-	else if (*result == '-')
-	{
-		if (ft_putchar('-') == -1)
-			return (-1);
-		list->flags_precval++;
-		i = 1;
-	}
-	if (uint_printnull2(list, result, length, i) == -1)
+	if (ft_putstr(result + i) == -1)
 		return (-1);
 	return (0);
 }

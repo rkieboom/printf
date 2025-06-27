@@ -1,46 +1,50 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         ::::::::             #
-#    Makefile                                           :+:    :+:             #
-#                                                      +:+                     #
-#    By: rkieboom <rkieboom@student.codam.nl>         +#+                      #
-#                                                    +#+                       #
-#    Created: 2020/01/27 17:40:05 by rkieboom       #+#    #+#                 #
-#    Updated: 2020/01/30 16:46:47 by rkieboom      ########   odam.nl          #
-#                                                                              #
-# **************************************************************************** #
-
-NAME =	libftprintf.a
-
-SRC =	ft_printf.c srcs/utils.c srcs/utils2.c srcs/utils3.c\
-		srcs/ft_itoa.c srcs/ft_uitoa.c srcs/checkprint.c\
-		srcs/checkprint2.c srcs/checkflags.c print/printchar.c\
-		print/printhex.c print/printhex2.c print/printhex3.c\
-		print/printint.c print/printint2.c print/printint3.c\
-		print/printint4.c print/printpnter.c print/printprocent.c\
-		print/printstring.c print/printstring2.c print/printstring3.c\
-		print/printuint.c print/printuint2.c print/printuint3.c
-
-OFILES = $(SRC:.c=.o)
+NAME =	printf.a
 
 CFLAGS = -Wall -Wextra -Werror
 
-.PHONY: all bonus clean fclean re
+SRCDIR =	srcs
+INCDIR =	includes
+OBJDIR =	objs
+
+SRCS_PRINT_FILES := printchar.c\
+		printhex.c printhex2.c printhex3.c\
+		printint.c printint2.c printint3.c\
+		printint4.c printpnter.c printprocent.c\
+		printstring.c printstring2.c printstring3.c\
+		printuint.c printuint2.c printuint3.c
+
+SRCS_FILES := ft_printf.c utils.c utils2.c utils3.c\
+		ft_itoa.c ft_uitoa.c checkprint.c\
+		checkprint2.c checkflags.c
+
+SRCS_PRINT_FILES := $(addprefix ${SRCDIR}print/, $(SRCS_PRINT_FILES))
+SRCS_FILES := $(addprefix ${SRCDIR}/, $(SRCS_FILES))
+
+SRCS := $(SRCS_FILES) $(SRCS_PRINT_FILES)
+OBJS = $(addprefix $(OBJDIR)/, $(notdir $(SRCS:.c=.o)))
 
 all: $(NAME)
 
-$(NAME): $(OFILES)
-	ar rc $(NAME) $(OFILES)
+$(NAME): $(OBJS)
+	ar rc $(NAME) $(OBJS)
 
-%.o: %.c
-	gcc $(CFLAGS) -c $? -o $@
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
+	@mkdir -p $(OBJDIR)
+	gcc $(CFLAGS) -c $< -o $@ -I$(INCDIR)
 
-bonus: $(NAME)
+$(OBJDIR)/%.o: $(SRCDIR)/print/%.c
+	@mkdir -p $(OBJDIR)
+	gcc $(CFLAGS) -c $< -o $@ -I$(INCDIR)
+
+objects:
+	@echo "${OBJS}"
 
 clean:
-	/bin/rm -f $(OFILES)
+	/bin/rm -rf $(OBJDIR)
 
 fclean: clean
 	/bin/rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re objects
