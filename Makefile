@@ -1,5 +1,6 @@
 NAME =	printf.a
 
+CC := gcc
 CFLAGS = -Wall -Wextra -Werror
 
 SRCDIR =	srcs
@@ -21,7 +22,7 @@ SRCS_PRINT_FILES := $(addprefix ${SRCDIR}print/, $(SRCS_PRINT_FILES))
 SRCS_FILES := $(addprefix ${SRCDIR}/, $(SRCS_FILES))
 
 SRCS := $(SRCS_FILES) $(SRCS_PRINT_FILES)
-OBJS = $(addprefix $(OBJDIR)/, $(notdir $(SRCS:.c=.o)))
+OBJS := $(addprefix $(OBJDIR)/, $(notdir $(SRCS:.c=.o)))
 
 all: $(NAME)
 
@@ -36,15 +37,17 @@ $(OBJDIR)/%.o: $(SRCDIR)/print/%.c
 	@mkdir -p $(OBJDIR)
 	gcc $(CFLAGS) -c $< -o $@ -I$(INCDIR)
 
-objects:
-	@echo "${OBJS}"
+build-objects: $(OBJS)
+
+print-objects:
+	@echo "$(OBJS)"
 
 clean:
-	/bin/rm -rf $(OBJDIR)
+	@/bin/rm -rf $(OBJDIR)
 
 fclean: clean
-	/bin/rm -f $(NAME)
+	@/bin/rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re objects
+.PHONY: all build-objects print-objects clean fclean re
