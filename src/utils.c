@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   utils.c                                            :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: rkieboom <rkieboom@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2020/01/02 12:47:04 by rkieboom       #+#    #+#                */
-/*   Updated: 2020/01/30 16:50:57 by rkieboom      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rkieboom <rkieboom@student.codam.nl>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/02 12:47:04 by rkieboom          #+#    #+#             */
+/*   Updated: 2025/08/06 15:54:32 by rkieboom         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_internal.h"
 
-int		ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
 	int			i;
 	long long	result;
@@ -39,9 +39,9 @@ int		ft_atoi(const char *str)
 	return ((int)(result * posorneg));
 }
 
-int		ft_putchar(char c)
+int	ft_putchar(char c)
 {
-	int ret;
+	int	ret;
 
 	ret = write(1, &c, 1);
 	if (ret == -1)
@@ -51,7 +51,7 @@ int		ft_putchar(char c)
 
 size_t	ft_strlen(const char *str)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	if (!str)
@@ -61,9 +61,9 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-int		ft_putstr(const char *str)
+int	ft_putstr(const char *str)
 {
-	int ret;
+	int	ret;
 
 	ret = write(1, str, ft_strlen(str));
 	if (ret == -1)
@@ -71,9 +71,9 @@ int		ft_putstr(const char *str)
 	return (0);
 }
 
-int		ft_putstrlen(const char *str, int len)
+int	ft_putstrlen(const char *str, int len)
 {
-	int ret;
+	int	ret;
 
 	ret = write(1, str, len);
 	if (ret == -1)

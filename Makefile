@@ -3,22 +3,18 @@ NAME =	printf.a
 CC := gcc
 CFLAGS = -Wall -Wextra -Werror
 
-SRCDIR =	srcs
-INCDIR =	includes
-OBJDIR =	objs
+SRCDIR =	src
+INCDIR =	inc
+OBJDIR =	obj
 
-SRCS_PRINT_FILES := printchar.c\
-		printhex.c printhex2.c printhex3.c\
-		printint.c printint2.c printint3.c\
-		printint4.c printpnter.c printprocent.c\
-		printstring.c printstring2.c printstring3.c\
-		printuint.c printuint2.c printuint3.c
+SRCS_PRINT_FILES := print_char.c print_string.c print_int.c\
+		print_uint.c print_hex.c print_pointer.c print_percent.c
 
 SRCS_FILES := ft_printf.c utils.c utils2.c utils3.c\
 		ft_itoa.c ft_uitoa.c checkprint.c\
 		checkprint2.c checkflags.c
 
-SRCS_PRINT_FILES := $(addprefix ${SRCDIR}print/, $(SRCS_PRINT_FILES))
+SRCS_PRINT_FILES := $(addprefix ${SRCDIR}/, $(SRCS_PRINT_FILES))
 SRCS_FILES := $(addprefix ${SRCDIR}/, $(SRCS_FILES))
 
 SRCS := $(SRCS_FILES) $(SRCS_PRINT_FILES)
@@ -33,9 +29,6 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p $(OBJDIR)
 	gcc $(CFLAGS) -c $< -o $@ -I$(INCDIR)
 
-$(OBJDIR)/%.o: $(SRCDIR)/print/%.c
-	@mkdir -p $(OBJDIR)
-	gcc $(CFLAGS) -c $< -o $@ -I$(INCDIR)
 
 build-objects: $(OBJS)
 

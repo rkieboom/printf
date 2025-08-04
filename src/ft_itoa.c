@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   ft_itoa.c                                          :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: rkieboom <rkieboom@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2019/11/04 15:32:52 by rkieboom       #+#    #+#                */
-/*   Updated: 2020/01/30 16:50:51 by rkieboom      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rkieboom <rkieboom@student.codam.nl>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/04 15:32:52 by rkieboom          #+#    #+#             */
+/*   Updated: 2025/08/06 16:02:05 by rkieboom         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_internal.h"
 
 static int	ft_mallocsize(int n)
 {
@@ -51,7 +51,7 @@ static void	ft_conversion(char *result, int n, int i)
 	}
 }
 
-char		*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	int		i;
 	char	*result;

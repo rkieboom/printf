@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   ft_uitoa.c                                         :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: rkieboom <rkieboom@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2020/01/24 19:21:05 by rkieboom       #+#    #+#                */
-/*   Updated: 2020/01/30 16:50:54 by rkieboom      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   ft_uitoa.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rkieboom <rkieboom@student.codam.nl>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/24 19:21:05 by rkieboom          #+#    #+#             */
+/*   Updated: 2025/08/06 15:51:53 by rkieboom         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_internal.h"
 
 static int	ft_umallocsize(unsigned int n)
 {
-	int j;
+	int	j;
 
 	j = 0;
 	if (n == 0)
@@ -31,11 +31,7 @@ static void	ft_uconversion(char *result, unsigned int n, unsigned int i)
 {
 	result[ft_umallocsize(n)] = '\0';
 	i = ft_umallocsize(n) - 1;
-	if (n < 0)
-	{
-		n = n * -1;
-		result[0] = '-';
-	}
+
 	if (n == 0)
 		result[0] = '0';
 	while (n > 0)
@@ -46,7 +42,7 @@ static void	ft_uconversion(char *result, unsigned int n, unsigned int i)
 	}
 }
 
-char		*ft_uitoa(unsigned int n)
+char	*ft_uitoa(unsigned int n)
 {
 	int		i;
 	char	*result;
